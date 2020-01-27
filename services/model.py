@@ -15,11 +15,14 @@ class Services(object):
     def update_service(self, service):
         service_name = service['service']
         del self.data['services'][self.get_service_index(service_name)]
-        self.data['services'].append(service)
-        self.is_data_updated = True
+        self.append_service(service)
 
     def create_service(self, service):
+        self.append_service(service)
+
+    def append_service(self, service):
         self.data['services'].append(service)
+        self.is_data_updated = True
 
     def get_service_index(self, service_name):
         for i, service in enumerate(self.data['services']):
