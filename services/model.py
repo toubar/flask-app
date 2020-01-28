@@ -32,7 +32,7 @@ class ServicesModel(object):
                 continue
         return None
 
-    # do async after response
     def persist_data_in_db(self):
-        with open(os.path.join('static', 'db.json'), 'w') as file:
-            json.dump(self.data, file, indent=4)
+        if self.is_data_updated:
+            with open(os.path.join('static', 'db.json'), 'w') as file:
+                json.dump(self.data, file, indent=4)

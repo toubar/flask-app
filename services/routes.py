@@ -31,14 +31,13 @@ def put_service():
     #  check if service exists or not
     if service_name in [service['service'] for service in services_data.data['services']]:
         services_data.update_service(request_json)  # service exists, update it
-        # todo - remove duplicate
-        services_data.persist_data_in_db()
         return 'Updated.', 200
     else:
         services_data.create_service(request_json)  # service name does not exists, create it
-        # todo - remove duplicate
-        services_data.persist_data_in_db()
         return 'Created.', 201
 
-# todo - after request -- persist data in DB?
-# @app.after_request
+
+@app.after_request
+def sync_db(response):
+    services_data.persist_data_in_db()
+    return response
