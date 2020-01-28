@@ -9,12 +9,9 @@ services_data = ServicesModel()
 json_validator = SchemaValidator()
 
 
-# todo - move logic to model.py keep the function call
 @app.before_request
-def sync_with_db():
-    if services_data.data == {} or services_data.is_data_updated:
-        services_data.data = services_data.load_data_from_json()
-        services_data.is_data_updated = False
+def before_each_request():
+    services_data.sync_data_with_db()
 
 
 @app.route('/services/', methods=['GET'])
@@ -38,6 +35,6 @@ def put_service():
 
 
 @app.after_request
-def sync_db(response):
+def after_each_request(response):
     services_data.persist_data_in_db()
     return response

@@ -7,7 +7,12 @@ class ServicesModel(object):
         self.data = {}
         self.is_data_updated = False
 
-    def load_data_from_json(self):
+    def sync_data_with_db(self):
+        if self.data == {} or self.is_data_updated:
+            self.data = self.load_data_from_db()
+            self.is_data_updated = False
+
+    def load_data_from_db(self):
         with open(os.path.join('static', 'db.json')) as file:
             self.data = json.load(file)
             return self.data
