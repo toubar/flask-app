@@ -2,7 +2,7 @@ import json
 import os
 
 
-class Services(object):
+class ServicesModel(object):
     def __init__(self):
         self.data = {}
         self.is_data_updated = False
