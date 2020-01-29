@@ -1,0 +1,50 @@
+swagger: "2.0"
+info:
+  description: This is a Services API
+  version: 1.0.0
+  title: Services API
+paths:
+  /services:
+    get:
+      summary: Returns a list of services
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/components/schemas/ServicePutRequest'
+    put:
+      summary: Update an existing service or create a new one
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: service
+          description: The service to update or create.
+          schema:
+            $ref: '#/components/schemas/ServicePutRequest'
+      responses:
+        '200':
+          description: OK. Service updated.
+        '201':
+          description: OK. Service Created.
+components:
+  schemas:
+    ServicePutRequest:
+      type: object
+      properties:
+        service:
+          type: string
+          format: string
+        ip:
+          type: string
+          format: string
+        servers:
+          type: array
+          items:
+            properties:
+              name:
+                type: string
+              status:
+                type: string
