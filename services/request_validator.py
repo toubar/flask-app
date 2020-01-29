@@ -3,7 +3,7 @@ from flask import jsonify, request
 from functools import wraps
 
 
-class SchemaValidator:
+class RequestValidator:
     schema = Schema({"service": str,
                      "ip": str,
                      "servers": [
@@ -29,7 +29,7 @@ class SchemaValidator:
         @wraps(f)
         def wrapper(*args, **kwargs):
             try:
-                SchemaValidator.schema.validate(request.json)
+                RequestValidator.schema.validate(request.json)
             except SchemaMissingKeyError as e:
                 print(e.code)
                 return e.code, 400

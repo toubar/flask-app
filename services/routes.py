@@ -1,7 +1,7 @@
 from flask import request, jsonify
 from services import app
 from services.model import ServicesModel
-from services.schema_validator import SchemaValidator
+from services.request_validator import RequestValidator
 
 # todo - better name
 services_data = ServicesModel()
@@ -18,8 +18,8 @@ def get_services():
 
 
 @app.route('/services/', methods=['PUT'])
-@SchemaValidator.validate_request
-@SchemaValidator.validate_schema
+@RequestValidator.validate_request
+@RequestValidator.validate_schema
 def put_service():
     request_json = request.json
     service_name = request_json['service']
