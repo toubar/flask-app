@@ -2,6 +2,7 @@ from flask import Flask
 from flask_cors import CORS
 from flask_swagger_ui import get_swaggerui_blueprint
 import os
+import logging
 
 SWAGGER_URL = '/swagger'
 API_URL = '/static/swagger.yaml'
@@ -15,6 +16,7 @@ swagger_ui_blueprint = get_swaggerui_blueprint(
 )
 
 app = Flask(__name__, static_folder=os.path.abspath('static'))
+logging.basicConfig(filename='logs.log', level=logging.DEBUG)
 app.register_blueprint(swagger_ui_blueprint, url_prefix=SWAGGER_URL)
 CORS(app)
 

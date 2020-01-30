@@ -2,3 +2,4 @@
 .gitignore
 deploy.sh
 venv
+/logs.log
