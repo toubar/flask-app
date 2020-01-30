@@ -16,6 +16,7 @@ class RequestValidator:
         @wraps(f)
         def decorator(*args, **kwargs):
             if request.json:
+                # todo - logs instead of prints
                 print("ok")
                 return f(*args, **kwargs)
             else:
