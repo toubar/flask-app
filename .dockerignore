@@ -1,0 +1,4 @@
+.idea
+.gitignore
+deploy.sh
+venv
