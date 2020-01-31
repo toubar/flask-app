@@ -3,3 +3,8 @@
 deploy.sh
 venv
 /logs.log
+.git
+Dockerfile
+docker-compose.yml
+.pytest_cache
+/__pycache__

@@ -34,7 +34,7 @@ function build_image() {
 
 function run_container() {
   printf "$green" "----------------------------------------RUNNING CONTAINER----------------------------------------"
-  docker run -d --name $DOCKER_CONTAINER_NAME -p 8000:5000 --rm $DOCKER_IMAGE_NAME:latest
+  docker run -d --name $DOCKER_CONTAINER_NAME -p 5000:5000 --rm $DOCKER_IMAGE_NAME:latest
   printf "$green" "---------------------------------------CONTAINER IS RUNNING--------------------------------------"
 }
 
