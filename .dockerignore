@@ -1,10 +1,11 @@
-.idea
+/.idea
 .gitignore
 deploy.sh
-venv
+/venv
 /logs.log
-.git
+/services/.pytest_cache
 Dockerfile
+.git
 docker-compose.yml
 .pytest_cache
 /__pycache__

@@ -4,7 +4,6 @@ from flask_swagger_ui import get_swaggerui_blueprint
 import os
 import logging
 from flask_jwt_simple import JWTManager
-from services.model import ServicesModel
 
 SWAGGER_URL = '/swagger'
 API_URL = '/static/swagger.yaml'
@@ -31,6 +30,8 @@ jwt = JWTManager(app)
 
 # enabling Cross-Origin Resource Sharing (CORS)
 CORS(app)
+
+from services.model import ServicesModel
 
 services_model = ServicesModel()
 

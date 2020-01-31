@@ -1,5 +1,9 @@
 /venv/
 /.idea
 /logs.log
-.pytest_cache
+/.ash_history
+/.coverage
+/services/tests/.pytest_cache
+/services/tests/logs.log
+/.pytest_cache
 __pycache__
