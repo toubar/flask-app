@@ -5,7 +5,7 @@ deploy.sh
 /logs.log
 /services/.pytest_cache
 Dockerfile
-.git
+/.git
 docker-compose.yml
 .pytest_cache
 /__pycache__

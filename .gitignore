@@ -5,5 +5,6 @@
 /.coverage
 /services/tests/.pytest_cache
 /services/tests/logs.log
+/services/.pytest_cache
 /.pytest_cache
-__pycache__
+/__pycache__

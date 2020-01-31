@@ -29,6 +29,28 @@ paths:
           description: OK. Service updated.
         '201':
           description: OK. Service Created.
+  /authenticate:
+    post:
+      summary: Returns a JWT token that protects the PUT endpoint
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: JWT Secret
+          description: just for PoC purporses, use "jwt_secret" as the jwt_secret
+          schema:
+            $ref: '#/components/schemas/JWTToken'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/components/schemas/ServicePutRequest'
+        '401':
+          description: Unauthorized, incorrect secret
+        '400':
+          description: Missing jwt_secret param
 components:
   schemas:
     ServicePutRequest:
@@ -48,3 +70,9 @@ components:
                 type: string
               status:
                 type: string
+    JWTToken:
+      type: object
+      properties:
+        jwt_secret:
+          type: string
+          format: string
