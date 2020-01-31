@@ -21,7 +21,7 @@ def get_services():
 def put_service():
     request_json = request.json
     service_name = request_json['service']
-    #  check if service exists or not
+    #  check if service exists in DB or not
     if service_name in [service['service'] for service in services_model.data['services']]:
         services_model.update_service(request_json)  # service exists, update it
         return jsonify(message="Service Updated"), 200
@@ -30,12 +30,11 @@ def put_service():
         return jsonify(message="Service Created"), 201
 
 
-# POST is controversial here, but its what is always used for auth
 @app.route('/authenticate', methods=['POST'])
 @RequestValidator.validate_request
 def authenticate():
     request_json = request.get_json()
-    # for a real app, real auth will be used. This is just a PoC
+    # for a real app, real auth (username + password) will be used. This is just a PoC
     jwt_secret = request_json.get('jwt_secret', None)
     if not jwt_secret:
         return jsonify(message="Missing jwt_secret parameter"), 400

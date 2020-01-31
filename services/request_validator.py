@@ -2,6 +2,8 @@ from schema import Schema, SchemaMissingKeyError, SchemaError, SchemaWrongKeyErr
 from flask import jsonify, request
 from functools import wraps
 
+from services import app
+
 
 class RequestValidator:
     schema = Schema({"service": str,
@@ -13,33 +15,30 @@ class RequestValidator:
 
     @staticmethod
     def validate_request(f):
+        # checks if request us a JSON
         @wraps(f)
         def decorator(*args, **kwargs):
             if request.json:
-                # todo - logs instead of prints
-                print("ok")
+                app.logger.info('Request is a valid JSON')
                 return f(*args, **kwargs)
             else:
                 msg = "payload must be a valid json"
-                return jsonify({"error": msg}), 400
+                app.logger.error(msg)
+                return jsonify(message=msg), 400
 
         return decorator
 
     @staticmethod
     def validate_schema(f):
+        # checks if the request JSON complies with the Schema
         @wraps(f)
         def wrapper(*args, **kwargs):
             try:
                 RequestValidator.schema.validate(request.json)
-            except SchemaMissingKeyError as e:
-                print(e.code)
-                return e.code, 400
-            except SchemaWrongKeyError as e:
-                print(e.code)
-                return e.code, 400
-            except SchemaError as e:
-                print(e.code)
-                return e.code, 400
+                app.logger.info("Request's JSON body complies with Schema")
+            except (SchemaMissingKeyError, SchemaWrongKeyError, SchemaError) as e:
+                app.logger.error(e.code)
+                return jsonify(message=e.code), 400
             else:
                 return f(*args, **kwargs)
 

@@ -4,7 +4,6 @@ from flask_swagger_ui import get_swaggerui_blueprint
 import os
 import logging
 from flask_jwt_simple import JWTManager
-
 from services.model import ServicesModel
 
 SWAGGER_URL = '/swagger'
@@ -18,10 +17,10 @@ swagger_ui_blueprint = get_swaggerui_blueprint(
     }
 )
 
-app = Flask(__name__, static_folder=os.path.abspath('static'))
-
 # logging configuration
-logging.basicConfig(filename='logs.log', level=logging.DEBUG)
+logging.basicConfig(filename='logs.log', level=logging.INFO)
+
+app = Flask(__name__, static_folder=os.path.abspath('static'))
 
 # swagger UI registration
 app.register_blueprint(swagger_ui_blueprint, url_prefix=SWAGGER_URL)
@@ -30,7 +29,7 @@ app.register_blueprint(swagger_ui_blueprint, url_prefix=SWAGGER_URL)
 app.config['JWT_SECRET_KEY'] = 'confidential'
 jwt = JWTManager(app)
 
-# enabling CORS
+# enabling Cross-Origin Resource Sharing (CORS)
 CORS(app)
 
 services_model = ServicesModel()
