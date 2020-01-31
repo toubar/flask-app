@@ -1,5 +1,7 @@
-.idea
+/.idea
 .gitignore
 deploy.sh
-venv
+/venv
 /logs.log
+/services/.pytest_cache
+Dockerfile

@@ -1,8 +1,9 @@
 import json
 import os
+from services import app
 
 
-class ServicesModel(object):
+class ServicesModel():
     def __init__(self):
         self.data = {}
         # this flag is set to true after PUT operations, otherwise data is loaded from memory
@@ -19,7 +20,7 @@ class ServicesModel(object):
                 self.data = json.load(file)
                 return self.data
         except (FileNotFoundError, OSError) as e:
-            print(e)
+            app.logger.error(e.code)
 
     def update_service(self, service):
         # get service name from request JSON
@@ -52,5 +53,4 @@ class ServicesModel(object):
                 with open(os.path.join('static', 'db.json'), 'w') as file:
                     json.dump(self.data, file, indent=2)
             except (FileNotFoundError, OSError) as e:
-                print(e)
-
+                app.logger.error(e.code)

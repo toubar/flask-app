@@ -1,3 +1,7 @@
 /venv/
 /.idea
 /logs.log
+/.ash_history
+/.coverage
+/services/tests/.pytest_cache
+/services/tests/logs.log
